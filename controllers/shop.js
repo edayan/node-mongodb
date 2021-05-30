@@ -1,3 +1,4 @@
+
 const Product = require('../models/product');
 
 exports.getProducts = (req, res, next) => {
@@ -25,8 +26,9 @@ exports.getProduct = (req, res, next) => {
   //     });
   //   })
   //   .catch(err => console.log(err));
-  Product.findById(prodId)
+  Product.findByid(prodId)
     .then(product => {
+      console.log('product', product)
       res.render('shop/product-detail', {
         product: product,
         pageTitle: product.title,
@@ -151,7 +153,7 @@ exports.postOrder = (req, res, next) => {
 
 exports.getOrders = (req, res, next) => {
   req.user
-    .getOrders({include: ['products']})
+    .getOrders({ include: ['products'] })
     .then(orders => {
       res.render('shop/orders', {
         path: '/orders',
